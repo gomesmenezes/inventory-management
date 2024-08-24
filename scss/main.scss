@@ -1,0 +1,17 @@
+@import 'variable';
+@import 'reset';
+@import 'grid';
+@import 'table';
+@import 'components';
+@import 'modal';
+
+body {
+    background-color: $bg-color;
+}
+
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

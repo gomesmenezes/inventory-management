@@ -1,0 +1,15 @@
+main {
+    .container {
+        max-width: 80rem;
+        width: 100%;
+        margin: 100px auto 50px;
+        background-color: $color-white;
+        border-radius: 10px;
+    }
+}
+
+.container {
+    max-width: 80rem;
+    width: 100%;
+    margin: 0 auto;
+}

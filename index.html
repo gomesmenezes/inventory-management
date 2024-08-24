@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Management</title>
+    <link rel="stylesheet" href="./css/main.min.css">
+</head>
+<body>
+
+    <main>
+        <div class="container">
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto (ID)</th>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                    <!-- As linhas serão inseridas aqui pelo JavaScript -->
+                </tbody>
+            </table>
+
+        </div>
+    </main>
+
+    <section>
+        <div class="container">
+
+            <div class="btns">
+
+                <button id="btn-add" type="button">Adicionar</button>
+                <button id="btn-update" type="button">Atualizar</button>
+                <button id="btn-delete" type="button">Deletar</button>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="modal-adicionar" class="modal none">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Adicionar Produto</h2>
+            <form>
+                <label for="produto">Nome do Produto</label>
+                <input required type="text" id="produto" name="produto">
+                <label for="quantidade" id="quantidadescss">Quantidade</label>
+                <input required type="number" id="quantidade" name="quantidade">
+                <button type="submit">Adicionar Produto</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-atualizar" class="modal none">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Atualizar Produto</h2>
+            <form>
+                <label for="idProduct">ID do Produto:</label>
+                <input required type="number" id="idProdutoUpdate" name="produto-update-id">
+                <label for="novo-nome">Novo Nome:</label>
+                <input required type="text" id="novo-nome" name="novo-nome">
+                <label for="nova-quantidade">Nova Quantidade:</label>
+                <input required type="number" id="nova-quantidade" name="nova-quantidade">
+                <button type="submit">Atualizar Produto</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="modal-deletar" class="modal none">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Deletar Produto</h2>
+            <form>
+                <label for="produto-id-deletar">ID do Produto:</label>
+                <input required type="number" id="produto-id-deletar" name="produto-id-deletar">
+                <button type="submit">Deletar Produto</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

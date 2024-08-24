@@ -1,0 +1,22 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    tr {
+        border-bottom: solid 1px $color-border;
+    }
+    th,
+    td {
+        text-align: center;
+        padding: 2.5rem;
+    }
+
+    td {
+        font-size: 1.6rem;
+    }
+
+    th {
+        background-color: $bg-thead;
+        font-weight: bold;
+        font-size: 2rem;
+    }
+}
