@@ -2,17 +2,23 @@ inventory = [
     {
         id: 0,
         name: 'Iphone 11',
-        quantity: 2
+        quantity: 2,
+        price: 2.999,
+        user: 'José Gomes'
     },
     {
         id: 1,
         name: 'Geladeira',
-        quantity: 2
+        quantity: 2,
+        price: 2.500,
+        user: 'José Gomes'
     },
     {
         id: 2,
         name: 'Teclado Mecanico',
-        quantity: 1
+        quantity: 1,
+        price: 219.99,
+        user: 'José Gomes'
     }
 ]
 
@@ -36,6 +42,14 @@ function updateTable() {
         const quantityCell = document.createElement('td');
         quantityCell.textContent = `${item.quantity}`;
         row.appendChild(quantityCell);
+
+        const priceCell = document.createElement('td');
+        priceCell.textContent = `R$${item.price}`;
+        row.appendChild(priceCell);
+
+        const userCell = document.createElement('td');
+        userCell.textContent = `${item.user}`;
+        row.appendChild(userCell);
     
         tbody.appendChild(row);
     });    
@@ -87,12 +101,43 @@ addForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const nameProduct = document.getElementById('produto').value;
-    const quantidadeProduct = document.getElementById('quantidade').value
+    const quantidadeProduct = parseInt(document.getElementById('quantidade').value);
+    const priceProduct = parseFloat(document.getElementById('priceInput').value);
+    const userProduct = document.getElementById('userInput').value
+
+    let isValid = true;
+    // Validações
+    if (nameProduct === '' ) {
+        alert('O campo não pode ficar vazio')
+    } 
+
+    if (quantidadeProduct === '' || isNaN(quantidadeProduct) || quantidadeProduct <= 0) {
+        alert('Por favor, insira uma quantidade válida (maior que 0).');
+        isValid = false;
+    }
+
+    if (priceProduct === '' || isNaN(priceProduct) || priceProduct <= 0) {
+        alert('Por favor, insira um preço válido (maior que 0).');
+        isValid = false;
+    }
+
+    if (userProduct === '') {
+        alert('Por favor, insira o nome de usuário.');
+        isValid = false;
+    }
+
+    // if (!isValid) {
+    //     event.preventDefault();
+    //     alert('CAMPOS NÃO PREENCHIDO')
+    //     return;
+    // }
 
     const newProducts = {
         id: inventory.length,
         name: nameProduct,
-        quantity: quantidadeProduct
+        quantity: quantidadeProduct,
+        price: priceProduct.toFixed(2),
+        user: userProduct
     }
 
     inventory.push(newProducts);
@@ -101,6 +146,8 @@ addForm.addEventListener('submit', (event) => {
 
     document.getElementById('produto').value = "";
     document.getElementById('quantidade').value = "";
+    document.getElementById('price').value = "";
+    document.getElementById('user').value = "";
 
     modalAdicinar.classList.add('none');
 });
