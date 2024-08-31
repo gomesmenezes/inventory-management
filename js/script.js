@@ -95,28 +95,31 @@ closeButtons.forEach(button => {
 
 // Capturar dados modal Adicionar
 
+
 const addForm = document.querySelector('#modal-adicionar form');
 
 addForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Evita o recarregamento da página
 
-    const nameProduct = document.getElementById('produto').value;
+    const nameProduct = document.getElementById('produto').value.trim();
     const quantidadeProduct = parseInt(document.getElementById('quantidade').value);
     const priceProduct = parseFloat(document.getElementById('priceInput').value);
-    const userProduct = document.getElementById('userInput').value
+    const userProduct = document.getElementById('userInput').value.trim();
 
     let isValid = true;
+
     // Validações
-    if (nameProduct === '' ) {
-        alert('O campo não pode ficar vazio')
+    if (nameProduct === '') {
+        alert('O campo "Nome do Produto" não pode ficar vazio.');
+        isValid = false;
     } 
 
-    if (quantidadeProduct === '' || isNaN(quantidadeProduct) || quantidadeProduct <= 0) {
+    if (isNaN(quantidadeProduct) || quantidadeProduct <= 0) {
         alert('Por favor, insira uma quantidade válida (maior que 0).');
         isValid = false;
     }
 
-    if (priceProduct === '' || isNaN(priceProduct) || priceProduct <= 0) {
+    if (isNaN(priceProduct) || priceProduct <= 0) {
         alert('Por favor, insira um preço válido (maior que 0).');
         isValid = false;
     }
@@ -126,11 +129,9 @@ addForm.addEventListener('submit', (event) => {
         isValid = false;
     }
 
-    // if (!isValid) {
-    //     event.preventDefault();
-    //     alert('CAMPOS NÃO PREENCHIDO')
-    //     return;
-    // }
+    if (!isValid) {
+        return;  // Para a execução do código se o formulário não for válido
+    }
 
     const newProducts = {
         id: inventory.length,
@@ -138,19 +139,24 @@ addForm.addEventListener('submit', (event) => {
         quantity: quantidadeProduct,
         price: priceProduct.toFixed(2),
         user: userProduct
-    }
+    };
 
     inventory.push(newProducts);
 
     updateTable();
 
+    // Limpa os valores dos campos do formulário
     document.getElementById('produto').value = "";
     document.getElementById('quantidade').value = "";
-    document.getElementById('price').value = "";
-    document.getElementById('user').value = "";
+    document.getElementById('priceInput').value = "";
+    document.getElementById('userInput').value = "";
 
-    modalAdicinar.classList.add('none');
+    // Aguarde até que a tabela seja atualizada antes de fechar o modal
+    setTimeout(() => {
+        modalAdicinar.classList.add('none');
+    }, 300); // Pequeno atraso para garantir que a tabela seja atualizada antes de fechar o modal
 });
+
 
 
 // Capturar dados modal Update
@@ -159,22 +165,59 @@ const updateForm = document.querySelector('#modal-atualizar form');
 
 updateForm.addEventListener('submit', (event) => {
     event.preventDefault();
-
-    const idProduct = parseInt(document.getElementById('idProdutoUpdate').value);
+    
+    const idProduct = parseInt(document.getElementById('idProdutoUpdate').value.trim());
     const newNameProduct = document.getElementById('novo-nome').value;
-    const newQuantity = document.getElementById('nova-quantidade').value;
+    const newQuantity = parseInt(document.getElementById('nova-quantidade').value);
+    const newPrice = parseFloat(document.getElementById('nova-preco').value);
+    const newUser = document.getElementById('novo-user').value.trim();
+
+    let isValid = true;
+
+    if (isNaN(idProduct) || idProduct < 0) {
+        alert('Por favor, insira um ID de produto válido.');
+        isValid = false;
+    }
+
+    if (newNameProduct === '') {
+        alert('O campo "Novo Nome" não pode ficar vazio.');
+        isValid = false;
+    }
+
+    if (isNaN(newQuantity) || newQuantity <= 0) {
+        alert('Por favor, insira uma quantidade válida (maior que 0).');
+        isValid = false;
+    }
+
+    if (isNaN(newPrice) || newPrice <= 0) {
+        alert('Por favor, insira um preço válido (maior que 0).');
+        isValid = false;
+    }
+
+    if (newUser === '') {
+        alert('O campo "Novo Usuário" não pode ficar vazio.');
+        isValid = false;
+    }
+
+    if (!isValid) {
+        return;
+    }
 
     const product = inventory.find(item => item.id == idProduct)
 
     if (product) {
         product.name = newNameProduct;
         product.quantity = newQuantity;
+        product.price = newPrice;
+        product.user = newUser;
 
         updateTable();
 
         document.getElementById('idProdutoUpdate').value = "";
         document.getElementById('novo-nome').value = "";
         document.getElementById('nova-quantidade').value = "";
+        document.getElementById('nova-preco').value = "";
+        document.getElementById('novo-user').value = "";
 
         modalUpdate.classList.add('none');
     } else {

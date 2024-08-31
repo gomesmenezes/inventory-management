@@ -78,11 +78,21 @@
             <h2>Atualizar Produto</h2>
             <form>
                 <label for="idProduct">ID do Produto:</label>
-                <input required type="number" id="idProdutoUpdate" name="produto-update-id">
+                <input type="number" id="idProdutoUpdate" name="produto-update-id">
+                
                 <label for="novo-nome">Novo Nome:</label>
-                <input required type="text" id="novo-nome" name="novo-nome">
+                <input type="text" id="novo-nome" name="novo-nome">
+                
                 <label for="nova-quantidade">Nova Quantidade:</label>
-                <input required type="number" id="nova-quantidade" name="nova-quantidade">
+                <input type="number" id="nova-quantidade" name="nova-quantidade">
+
+                <label for="novo-preco">Novo Preço:</label>
+                <input type="number" id="nova-preco" name="nova-preco" step="0.01">
+
+                <label for="novo-user">Novo Usuario:</label>
+                <input type="text" id="novo-user" name="novo-user">
+               
+
                 <button type="submit">Atualizar Produto</button>
             </form>
         </div>
